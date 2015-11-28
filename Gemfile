@@ -50,3 +50,9 @@ gem 'devise', '~> 3.5'
 
 # Flexible administration
 gem 'activeadmin', github: 'activeadmin'
+
+# Provides object geocoding
+gem 'geocoder', '~> 1.2'
+
+# Wrapper for geocomplete.js - a jQuery Geocoding and Places Autocomplete Plugin
+gem 'geocomplete_rails', '~> 1.6'
