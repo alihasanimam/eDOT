@@ -8,7 +8,7 @@ ActiveAdmin.register Inventory do
   menu false
   navigation_menu :default
 
-  permit_params :owner_type, :owner_type_id, :quantity
+  permit_params :owner_type, :owner_type_id, :quantity, :medicine_id
 
   # belongs_to :employee, polymorphic: true
 

@@ -9,7 +9,7 @@ class Employee < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :inventories, as: :owner
+  has_many :inventories, as: :owner, dependent: :destroy
 
   validates :name, :type, presence: true
 
