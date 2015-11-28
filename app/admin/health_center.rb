@@ -96,7 +96,7 @@ ActiveAdmin.register HealthCenter do
             end
             column :quantity
             column :created_at
-            column :updated_at
+            # column :updated_at
             column 'Actions' do |inventory|
               actions = []
               actions << link_to(I18n.t('active_admin.view'), admin_health_center_inventory_path(resource, inventory))
@@ -109,7 +109,7 @@ ActiveAdmin.register HealthCenter do
 
         div do
           para do
-            link_to I18n.t('active_admin.new_model', model: 'Community'), new_admin_health_center_community_path(resource), class: 'button'
+            link_to I18n.t('active_admin.new_model', model: 'Inventory'), new_admin_health_center_inventory_path(resource), class: 'button'
           end
         end
       end

@@ -39,7 +39,7 @@ ActiveAdmin.register Employee do
   end
 
   show do
-    panel I18n.t('active_admin.details', model: 'Health Center') do
+    panel I18n.t('active_admin.details', model: 'Employee') do
       attributes_table_for resource do
         row :id
         row :name
@@ -66,7 +66,7 @@ ActiveAdmin.register Employee do
             end
             column :quantity
             column :created_at
-            column :updated_at
+            # column :updated_at
             column 'Actions' do |inventory|
               actions = []
               actions << link_to(I18n.t('active_admin.view'), admin_employee_inventory_path(resource, inventory))
@@ -79,7 +79,7 @@ ActiveAdmin.register Employee do
 
         div do
           para do
-            link_to I18n.t('active_admin.new_model', model: 'Community'), new_admin_health_center_community_path(resource), class: 'button'
+            link_to I18n.t('active_admin.new_model', model: 'Inventory'), new_admin_employee_inventory_path(resource), class: 'button'
           end
         end
       end
