@@ -50,3 +50,6 @@ gem 'devise', '~> 3.5'
 
 # Flexible administration
 gem 'activeadmin', github: 'activeadmin'
+
+# Provides object geocoding
+gem 'geocoder', '~> 1.2'
