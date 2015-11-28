@@ -9,6 +9,9 @@ class Employee < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+  belongs_to :health_center
+
   validates :name, :type, presence: true
 
 

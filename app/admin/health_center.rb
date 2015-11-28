@@ -24,6 +24,37 @@ ActiveAdmin.register HealthCenter do
     end
 
     tabs do
+      tab 'Employees' do
+        collection = resource.employees.page(params[:employees_page]).per(10)
+        pagination_options = {param_name: 'employees_page', download_links: false}
+        paginated_collection(collection, pagination_options) do
+          table_options = { id: 'employees-table', class: 'index_table' }
+          table_for(collection, table_options) do
+            column :id
+            column :name
+            column :email
+            column :type
+            column :gender
+            column :birthday
+            column :created_at
+            column :updated_at
+            column 'Actions' do |employee|
+              actions = []
+              actions << link_to(I18n.t('active_admin.view'), admin_health_center_employee_path(resource, employee))
+              actions << link_to(I18n.t('active_admin.edit'), edit_admin_health_center_employee_path(resource, employee))
+              actions << link_to(I18n.t('active_admin.delete'), admin_health_center_employee_path(resource, employee), method: :delete, data: { confirm: I18n.t('active_admin.delete_confirmation')})
+              actions.join(' ').html_safe
+            end
+          end
+        end
+
+        div do
+          para do
+            link_to I18n.t('active_admin.new_model', model: 'Employee'), new_admin_health_center_employee_path(resource), class: 'button'
+          end
+        end
+      end
+
       tab 'Communities' do
         collection = resource.communities.page(params[:communities_page]).per(10)
         pagination_options = {param_name: 'communities_page', download_links: false}

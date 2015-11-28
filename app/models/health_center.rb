@@ -5,6 +5,7 @@ class HealthCenter < ActiveRecord::Base
   include GeoCoder
 
   has_many :communities, dependent: :destroy
+  has_many :employees, dependent:  :destroy
 
   validates :name, :type, presence: true
 end

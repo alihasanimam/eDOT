@@ -1,5 +1,7 @@
 ActiveAdmin.register Employee do
-  permit_params :email, :password, :password_confirmation, :name, :gender, :type, :birthday, :phone
+  belongs_to :health_center, optional: true
+
+  permit_params :email, :password, :password_confirmation, :name, :gender, :type, :birthday, :phone, :health_center_id
 
   index do
     selectable_column
@@ -18,6 +20,7 @@ ActiveAdmin.register Employee do
 
   form do |f|
     f.inputs I18n.t('active_admin.details', model: 'Employee') do
+      f.input :health_center
       f.input :email
       f.input :name
       f.input :gender, collection: Employee::gender_options
@@ -32,5 +35,8 @@ ActiveAdmin.register Employee do
     end
     f.actions
   end
+
+  menu false
+  navigation_menu :default
 
 end
