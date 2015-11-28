@@ -11,6 +11,6 @@ class Patient < ActiveRecord::Base
   end
 
   def self.status_options
-    GENDERS.collect{|o| [o.humanize, o]}
+    STATUS.collect{|o| [o.humanize, o]}
   end
 end

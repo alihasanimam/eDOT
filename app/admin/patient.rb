@@ -1,5 +1,5 @@
 ActiveAdmin.register Patient do
-  permit_params :name, :address, :national_id, :gender, :birthday, :status, :phone
+  permit_params :name, :address, :national_id, :gender, :birthday, :status, :phone, :patient_type
 
   index do
     selectable_column
