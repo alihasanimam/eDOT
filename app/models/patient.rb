@@ -1,16 +1,10 @@
 class Patient < ActiveRecord::Base
+  STATUSES = %w(new curred ongoing)
   GENDERS = %w(male female)
-  STATUS = %w(new curred ongoing)
+  include GenderOptions
+  include StatusOptions
 
   belongs_to :patient_type
 
   validates :name, :national_id, presence: true
-
-  def self.gender_options
-    GENDERS.collect{|o| [o.humanize, o]}
-  end
-
-  def self.status_options
-    STATUS.collect{|o| [o.humanize, o]}
-  end
 end
