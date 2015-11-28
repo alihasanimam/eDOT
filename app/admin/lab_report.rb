@@ -13,4 +13,15 @@ ActiveAdmin.register LabReport do
     f.actions
   end
 
+  index do
+    selectable_column
+    id_column
+    column :patient
+    column :month
+    column :data2
+    column :testedby
+    column :created_at
+    actions
+  end
+
 end
