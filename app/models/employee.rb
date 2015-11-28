@@ -1,8 +1,8 @@
 class Employee < ActiveRecord::Base
-  self.inheritance_column = nil
-
   TYPES = %w(admin doctor nurse technician chw)
   GENDERS = %w(male female)
+
+  include TypeOptions
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -14,9 +14,5 @@ class Employee < ActiveRecord::Base
 
   def self.gender_options
     GENDERS.collect{|o| [o.humanize, o]}
-  end
-
-  def self.type_options
-    TYPES.collect{|o| [o.humanize, o]}
   end
 end
