@@ -10,6 +10,7 @@ class Employee < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :inventories, as: :owner, dependent: :destroy
+  belongs_to :health_center
 
   validates :name, :type, presence: true
 

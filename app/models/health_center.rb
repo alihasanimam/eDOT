@@ -6,6 +6,7 @@ class HealthCenter < ActiveRecord::Base
 
   has_many :inventories, as: :owner, dependent: :destroy
   has_many :communities, dependent: :destroy
+  has_many :employees, dependent:  :destroy
 
   validates :name, :type, presence: true
 end
