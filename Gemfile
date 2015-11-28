@@ -45,3 +45,8 @@ group :development do
   gem 'spring'
 end
 
+# Flexible authentication solution for Rails with Warden
+gem 'devise', '~> 3.5'
+
+# Flexible administration
+gem 'activeadmin', github: 'activeadmin'
