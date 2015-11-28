@@ -86,6 +86,8 @@ GEM
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
     geocoder (1.2.12)
+    geocomplete_rails (1.6.5)
+      railties (>= 3.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     has_scope (0.6.0)
@@ -205,6 +207,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise (~> 3.5)
   geocoder (~> 1.2)
+  geocomplete_rails (~> 1.6)
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.15)

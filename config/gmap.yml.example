@@ -1,0 +1,10 @@
+development:
+    api_key: AIzaSyC1m23ZTyBFbd-GUokRdfAm4NaW2WzTTXA
+
+test:
+    api_key: AIzaSyC1m23ZTyBFbd-GUokRdfAm4NaW2WzTTXA
+
+# Do not keep production secrets in the repository,
+# instead read values from the environment.
+production:
+    api_key: <%= ENV["GOOGLE_MAP_API_KEY"] %>

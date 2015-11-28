@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_id: 1
+  month: 1
+  data1: MyString
+  data2: MyString
+  testedby_id: 1
+
+two:
+  patient_id: 1
+  month: 1
+  data1: MyString
+  data2: MyString
+  testedby_id: 1
