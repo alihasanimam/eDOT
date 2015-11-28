@@ -4,7 +4,8 @@ class HealthCenter < ActiveRecord::Base
   include TypeOptions
   include GeoCoder
 
-  has_many :inventories, as: :owner
+  has_many :inventories, as: :owner, dependent: :destroy
+  has_many :communities, dependent: :destroy
 
   validates :name, :type, presence: true
 end

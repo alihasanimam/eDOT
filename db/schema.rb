@@ -68,10 +68,24 @@ ActiveRecord::Schema.define(version: 20151128163620) do
   create_table "inventories", force: :cascade do |t|
     t.string   "owner_type"
     t.integer  "owner_id"
+    t.integer  "medicine_id"
     t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+
+  create_table "lab_reports", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.integer  "month"
+    t.string   "data1"
+    t.string   "data2"
+    t.integer  "testedby_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "lab_reports", ["patient_id"], name: "index_lab_reports_on_patient_id", using: :btree
+  add_index "lab_reports", ["testedby_id"], name: "index_lab_reports_on_testedby_id", using: :btree
 
   create_table "medicines", force: :cascade do |t|
     t.string   "name"
@@ -80,5 +94,19 @@ ActiveRecord::Schema.define(version: 20151128163620) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "patients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "national_id"
+    t.string   "gender"
+    t.date     "birthday"
+    t.string   "status"
+    t.string   "phone"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "patients", ["national_id"], name: "index_patients_on_national_id", unique: true, using: :btree
 
 end

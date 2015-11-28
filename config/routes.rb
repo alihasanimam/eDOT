@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   devise_for :employees, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  namespace :admin do
+    resources :health_centers do
+      resources :inventories
+    end
+    resources :employees do
+      resources :inventories
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
