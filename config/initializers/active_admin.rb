@@ -189,7 +189,7 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+  config.register_javascript 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC1m23ZTyBFbd-GUokRdfAm4NaW2WzTTXA&libraries=places'
 
   # == CSV options
   #
