@@ -26,7 +26,8 @@ ActiveAdmin.register Patient do
       f.input :national_id
       f.input :gender, collection: Patient::gender_options
       f.input :birthday, as: :datepicker, datepicker_options: { defaultDate: '1970-01-01' }
-      f.input :status
+      f.input :patient_type
+      f.input :status, collection: Patient::status_options
       f.input :phone
     end
     f.actions
