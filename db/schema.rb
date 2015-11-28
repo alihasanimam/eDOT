@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128173322) do
+ActiveRecord::Schema.define(version: 20151128222028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20151128173322) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "phone"
+    t.integer  "health_center_id"
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
@@ -109,6 +110,13 @@ ActiveRecord::Schema.define(version: 20151128173322) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "patient_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
@@ -117,8 +125,11 @@ ActiveRecord::Schema.define(version: 20151128173322) do
     t.date     "birthday"
     t.string   "status"
     t.string   "phone"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "patient_type_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "patients", ["national_id"], name: "index_patients_on_national_id", unique: true, using: :btree

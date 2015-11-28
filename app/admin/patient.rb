@@ -22,7 +22,7 @@ ActiveAdmin.register Patient do
   form do |f|
     f.inputs I18n.t('active_admin.details', model: 'Patient') do
       f.input :name
-      f.input :address
+      f.input :address, input_html: { class: 'address' }
       f.input :national_id, label: 'National ID'
       f.input :gender, collection: Patient::gender_options
       f.input :birthday, as: :datepicker, datepicker_options: { defaultDate: '1970-01-01' }

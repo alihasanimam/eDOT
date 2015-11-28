@@ -3,6 +3,7 @@ class Patient < ActiveRecord::Base
   GENDERS = %w(male female)
   include GenderOptions
   include StatusOptions
+  include GeoCoder
 
   belongs_to :patient_type
 
