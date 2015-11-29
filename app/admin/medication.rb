@@ -12,4 +12,12 @@ ActiveAdmin.register Medication do
     end
     f.actions
   end
+
+  index do
+    selectable_column
+    id_column
+    column :month
+    column :created_at
+    actions
+  end
 end
