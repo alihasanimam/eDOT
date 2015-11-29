@@ -24,6 +24,10 @@ ActiveAdmin.register HealthCenter do
     end
 
     tabs do
+      tab 'Patient Map' do
+        render partial: 'map', locals: {patients: Patient.all}
+      end
+
       tab 'Employees' do
         collection = resource.employees.page(params[:employees_page]).per(10)
         pagination_options = {param_name: 'employees_page', download_links: false}
@@ -112,10 +116,6 @@ ActiveAdmin.register HealthCenter do
             link_to I18n.t('active_admin.new_model', model: 'Inventory'), new_admin_health_center_inventory_path(resource), class: 'button'
           end
         end
-      end
-
-      tab 'Patient Map' do
-        render partial: 'map', locals: {patients: Patient.all}
       end
     end
   end

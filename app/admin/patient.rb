@@ -58,6 +58,36 @@ ActiveAdmin.register Patient do
     end
 
     tabs do
+      tab 'Lab Reports' do
+        collection = resource.lab_reports.includes(:testedby).page(params[:lab_reports_page]).per(10)
+        pagination_options = {param_name: 'lab_reports_page', download_links: false}
+        paginated_collection(collection, pagination_options) do
+          table_options = { id: 'lab_reports-table', class: 'index_table' }
+          table_for(collection, table_options) do
+            column :id
+            column :month
+            column :data1
+            column :data2
+            column :testedby do |lab_report|
+              lab_report.testedby.name
+            end
+            column :created_at
+            column 'Actions' do |inventory|
+              actions = []
+              actions << link_to(I18n.t('active_admin.view'), admin_patient_lab_report_path(resource, inventory))
+              actions << link_to(I18n.t('active_admin.edit'), edit_admin_patient_lab_report_path(resource, inventory))
+              actions << link_to(I18n.t('active_admin.delete'), admin_patient_lab_report_path(resource, inventory), method: :delete, data: { confirm: I18n.t('active_admin.delete_confirmation')})
+              actions.join(' ').html_safe
+            end
+          end
+        end
+
+        div do
+          para do
+            link_to I18n.t('active_admin.new_model', model: 'Lab Report'), new_admin_patient_lab_report_path(resource), class: 'button'
+          end
+        end
+      end
       tab 'Medications' do
         render partial: 'medications', locals: { medications: resource.medications.order(created_at: :asc) }
         div do
