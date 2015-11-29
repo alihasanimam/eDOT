@@ -1,0 +1,76 @@
+<div id="slick-grid" style="width:100%;height:500px;"></div>
+<script>
+    function formatter(row, cell, value, columnDef, dataContext) {
+        if(value || (value == 'true')){
+            return '<img src="<%= image_path('tick.png') %>"/>';
+        }else{
+            return '<img src="<%= image_path('cross.png') %>"/>';
+        }
+    }
+    function requiredFieldValidator(value) {
+        if (value == null || value == undefined || !value.length) {
+            return {valid: false, msg: "This is a required field"};
+        } else {
+            return {valid: true, msg: null};
+        }
+    }
+
+    var grid;
+    var data = [];
+    var days = new Array(30);
+    var medications = <%= raw medications.to_json %>;
+    var columns = [];
+    columns.push({
+        id: 'month',
+        name: 'Month',
+        field: 'month',
+        cssClass: "cell-title"
+    });
+    for (var i = 0; i < days.length; i++) {
+        var day = (i + 1).toString();
+        columns.push({
+            id: day,
+            name: day,
+            field: day,
+            cssClass: "cell-title",
+            editor: Slick.Editors.Checkbox,
+            formatter: formatter
+        });
+    }
+    var options = {
+        editable: true,
+        enableAddRow: true,
+        enableCellNavigation: true,
+        asyncEditorLoading: false,
+        autoEdit: false
+    };
+
+    $(function () {
+        $.each(medications, function( index, medication ) {
+            console.log(medication);
+            var row = {};
+            row['month'] = medication.month;
+            row['medication_id'] = medication.id;
+            for (var i = 0; i < days.length; i++) {
+                var day = (i + 1);
+                row[day.toString()] = medication.days[day];
+            }
+            data.push(row);
+        });
+
+        grid = new Slick.Grid("#slick-grid", data, columns, options);
+
+        grid.setSelectionModel(new Slick.CellSelectionModel());
+
+        grid.onCellChange.subscribe(function (e, args) {
+            console.log(args);
+            var item = args.item;
+            console.log(item);
+            var data = {
+              medication_id: item.medication_id,
+              days: item
+            };
+            $.post( "<%= update_medication_admin_patient_path(resource) %>", data );
+        });
+    })
+</script>

@@ -6,6 +6,7 @@ class Patient < ActiveRecord::Base
   include GeoCoder
 
   belongs_to :patient_type
+  has_many :medications
 
   validates :name, :national_id, presence: true
 end
