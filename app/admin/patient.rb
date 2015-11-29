@@ -13,6 +13,16 @@ ActiveAdmin.register Patient do
     actions
   end
 
+  member_action :update_medication, method: :post do
+    if params[:medication_id].present?
+      medication = resource.medications.find(params[:medication_id])
+      medication.days = params[:days]
+      medication.save
+    end
+
+    render nothing: true
+  end
+
   filter :name
   filter :national_id
   filter :current_sign_in_at
@@ -31,5 +41,31 @@ ActiveAdmin.register Patient do
       f.input :phone
     end
     f.actions
+  end
+
+  show do
+    panel I18n.t('active_admin.details', model: 'Employee') do
+      attributes_table_for resource do
+        row :id
+        row :name
+        row :address
+        row :national_id
+        row :gender
+        row :status
+        row :created_at
+        row :updated_at
+      end
+    end
+
+    tabs do
+      tab 'Medications' do
+        render partial: 'medications', locals: { medications: resource.medications.order(created_at: :asc) }
+        div do
+          para do
+            link_to I18n.t('active_admin.new_model', model: 'Medication'), new_admin_patient_medication_path(resource), class: 'button'
+          end
+        end
+      end
+    end
   end
 end

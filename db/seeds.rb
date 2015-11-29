@@ -5,4 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Employee.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', name: 'Admin', type: 'admin')
+Employee.delete_all
+Employee.create!(email: 'admin@edot.com', password: 'password', password_confirmation: 'password', name: 'Test Admin', type: 'admin')
+Employee.create!(email: 'doctor@edot.com', password: 'password', password_confirmation: 'password', name: 'Test Doctor', type: 'doctor')
+Employee.create!(email: 'nurse@edot.com', password: 'password', password_confirmation: 'password', name: 'Test Nurse', type: 'nurse')
+Employee.create!(email: 'technician@edot.com', password: 'password', password_confirmation: 'password', name: 'Technician', type: 'technician')
+Employee.create!(email: 'chw1@edot.com', password: 'password', password_confirmation: 'password', name: 'Community Health Worker-1', type: 'chw')
+Employee.create!(email: 'chw2@edot.com', password: 'password', password_confirmation: 'password', name: 'Community Health Worker-2', type: 'chw')
+
