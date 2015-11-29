@@ -1,0 +1,15 @@
+<div style='width: 800px;'>
+  <div id="multi_markers" style='width: 1250px; height: 400px;'></div>
+</div>
+
+<script>
+  $(function(){
+    var handler = Gmaps.build('Google');
+    var patient_locations = <%= raw patients.collect{|p| { lat: p.latitude, lng: p.longitude } }.to_json %>;
+    handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+      var markers = handler.addMarkers(patient_locations);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+  });
+</script>

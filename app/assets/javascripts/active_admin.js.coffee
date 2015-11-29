@@ -1,6 +1,8 @@
 #= require active_admin/base
 #= require geocomplete
 #= require chosen-jquery
+#= require underscore
+#= require gmaps/google
 
 $ ->
   $('.address').geocomplete()

@@ -189,7 +189,9 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  config.register_javascript "https://maps.googleapis.com/maps/api/js?key=#{ConfigFile.load('gmap')['api_key']}&libraries=places"
+  # config.register_javascript "https://maps.googleapis.com/maps/api/js?key=#{ConfigFile.load('gmap')['api_key']}&libraries=places"
+  config.register_javascript '//maps.google.com/maps/api/js?v=3.18&sensor=false&client=&key=&libraries=geometry,places&language=&hl=&region='
+  config.register_javascript '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js'
 
   # == CSV options
   #

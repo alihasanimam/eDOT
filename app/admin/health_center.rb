@@ -113,6 +113,10 @@ ActiveAdmin.register HealthCenter do
           end
         end
       end
+
+      tab 'Patient Map' do
+        render partial: 'map', locals: {patients: Patient.all}
+      end
     end
   end
 end

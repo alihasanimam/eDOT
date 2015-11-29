@@ -63,3 +63,7 @@ gem 'responsive_active_admin', '~> 0.0.5'
 # Chosen is a javascript library of select box
 gem 'chosen-rails', '~> 1.4'
 gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'
+
+# Google Maps for clustering
+gem 'underscore-rails'
+gem 'gmaps4rails'
