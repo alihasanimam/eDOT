@@ -1,6 +1,16 @@
 ActiveAdmin.register HealthCenter do
   permit_params :name, :address, :type, :phone
 
+  controller do
+    def scoped_collection
+      if current_employee.doctor?
+        end_of_association_chain.for_employee(current_employee)
+      else
+        end_of_association_chain
+      end
+    end
+  end
+
   form do |f|
     f.inputs I18n.t('active_admin.details', model: 'Health Center') do
       f.input :name
