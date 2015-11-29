@@ -1,5 +1,5 @@
 ActiveAdmin.register Patient do
-  permit_params :name, :address, :national_id, :gender, :birthday, :status, :phone, :patient_type_id
+  permit_params :name, :address, :national_id, :gender, :birthday, :status, :phone, :patient_type_id, :cared_by_id
 
   index do
     selectable_column
@@ -9,6 +9,7 @@ ActiveAdmin.register Patient do
     column :national_id
     column :gender
     column :status
+    column :cared_by
     column :created_at
     actions
   end
@@ -31,6 +32,7 @@ ActiveAdmin.register Patient do
 
   form do |f|
     f.inputs I18n.t('active_admin.details', model: 'Patient') do
+      f.input :cared_by
       f.input :name
       f.input :address, input_html: { class: 'address' }
       f.input :national_id, label: 'National ID'
