@@ -13,4 +13,24 @@ class Employee < ActiveRecord::Base
   belongs_to :health_center
 
   validates :name, :type, presence: true
+
+  def admin?
+    self.type == 'admin'
+  end
+
+  def doctor?
+    self.type == 'doctor'
+  end
+
+  def nurse?
+    self.type == 'nurse'
+  end
+
+  def technician?
+    self.type == 'technician'
+  end
+
+  def chw?
+    self.type == 'chw'
+  end
 end

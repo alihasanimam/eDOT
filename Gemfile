@@ -67,3 +67,6 @@ gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'
 # Google Maps for clustering
 gem 'underscore-rails'
 gem 'gmaps4rails'
+
+# Authorization solution for Rails
+gem 'cancancan', '~> 1.13'

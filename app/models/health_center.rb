@@ -8,5 +8,7 @@ class HealthCenter < ActiveRecord::Base
   has_many :communities, dependent: :destroy
   has_many :employees, dependent:  :destroy
 
+  scope :for_employee, ->(employee) { joins(:employees).where(employees: {id: [employee.id]}) }
+
   validates :name, :type, presence: true
 end
