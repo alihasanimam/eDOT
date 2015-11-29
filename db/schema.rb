@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129132000) do
+ActiveRecord::Schema.define(version: 20151129145328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -84,9 +85,9 @@ ActiveRecord::Schema.define(version: 20151129132000) do
     t.string   "owner_type"
     t.integer  "owner_id"
     t.integer  "medicine_id"
-    t.integer  "quantity"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "quantity",    default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "lab_reports", force: :cascade do |t|
@@ -102,6 +103,17 @@ ActiveRecord::Schema.define(version: 20151129132000) do
   add_index "lab_reports", ["patient_id"], name: "index_lab_reports_on_patient_id", using: :btree
   add_index "lab_reports", ["testedby_id"], name: "index_lab_reports_on_testedby_id", using: :btree
 
+  create_table "medications", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.string   "month"
+    t.string   "year"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.jsonb    "days",       default: {}, null: false
+  end
+
+  add_index "medications", ["days"], name: "index_medications_on_days", using: :gin
+
   create_table "medicines", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -109,6 +121,14 @@ ActiveRecord::Schema.define(version: 20151129132000) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "medicines_patients", id: false, force: :cascade do |t|
+    t.integer "medicine_id"
+    t.integer "patient_id"
+  end
+
+  add_index "medicines_patients", ["medicine_id"], name: "index_medicines_patients_on_medicine_id", using: :btree
+  add_index "medicines_patients", ["patient_id"], name: "index_medicines_patients_on_patient_id", using: :btree
 
   create_table "patient_types", force: :cascade do |t|
     t.string   "name"
@@ -130,6 +150,7 @@ ActiveRecord::Schema.define(version: 20151129132000) do
     t.integer  "patient_type_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "cared_by_id"
   end
 
   add_index "patients", ["national_id"], name: "index_patients_on_national_id", unique: true, using: :btree
