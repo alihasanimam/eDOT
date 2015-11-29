@@ -1,4 +1,4 @@
-<div id="slick-grid" style="width:100%;height:500px;"></div>
+<div id="slick-grid" style="width:100%;height:200px;"></div>
 <script>
     function formatter(row, cell, value, columnDef, dataContext) {
         if(value || (value == 'true')){
@@ -17,7 +17,7 @@
 
     var grid;
     var data = [];
-    var days = new Array(30);
+    var days = new Array(31);
     var medications = <%= raw medications.to_json %>;
     var columns = [];
     columns.push({
@@ -34,7 +34,8 @@
             field: day,
             cssClass: "cell-title",
             editor: Slick.Editors.Checkbox,
-            formatter: formatter
+            formatter: formatter,
+            width: 35
         });
     }
     var options = {
