@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128162827) do
+ActiveRecord::Schema.define(version: 20151128180852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(version: 20151128162827) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "communities", force: :cascade do |t|
+    t.string   "name"
+    t.text     "address"
+    t.integer  "employee_id"
+    t.integer  "health_center_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "communities", ["employee_id"], name: "index_communities_on_employee_id", using: :btree
+  add_index "communities", ["health_center_id"], name: "index_communities_on_health_center_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -78,6 +92,13 @@ ActiveRecord::Schema.define(version: 20151128162827) do
   add_index "lab_reports", ["patient_id"], name: "index_lab_reports_on_patient_id", using: :btree
   add_index "lab_reports", ["testedby_id"], name: "index_lab_reports_on_testedby_id", using: :btree
 
+  create_table "patient_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
@@ -86,8 +107,9 @@ ActiveRecord::Schema.define(version: 20151128162827) do
     t.date     "birthday"
     t.string   "status"
     t.string   "phone"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "patient_type_id"
   end
 
   add_index "patients", ["national_id"], name: "index_patients_on_national_id", unique: true, using: :btree
