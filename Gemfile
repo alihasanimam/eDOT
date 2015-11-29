@@ -56,3 +56,10 @@ gem 'geocoder', '~> 1.2'
 
 # Wrapper for geocomplete.js - a jQuery Geocoding and Places Autocomplete Plugin
 gem 'geocomplete_rails', '~> 1.6'
+
+# Responsive styles for ActiveAdmin
+gem 'responsive_active_admin', '~> 0.0.5'
+
+# Chosen is a javascript library of select box
+gem 'chosen-rails', '~> 1.4'
+gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'

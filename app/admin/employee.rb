@@ -1,5 +1,9 @@
 ActiveAdmin.register Employee do
-  permit_params :email, :password, :password_confirmation, :name, :gender, :type, :birthday, :phone
+  belongs_to :health_center, optional: true
+  menu false
+  navigation_menu :default
+
+  permit_params :email, :password, :password_confirmation, :name, :gender, :type, :birthday, :phone, :health_center_id
 
   index do
     selectable_column
@@ -18,6 +22,7 @@ ActiveAdmin.register Employee do
 
   form do |f|
     f.inputs I18n.t('active_admin.details', model: 'Employee') do
+      f.input :health_center
       f.input :email
       f.input :name
       f.input :gender, collection: Employee::gender_options
@@ -33,4 +38,51 @@ ActiveAdmin.register Employee do
     f.actions
   end
 
+  show do
+    panel I18n.t('active_admin.details', model: 'Employee') do
+      attributes_table_for resource do
+        row :id
+        row :name
+        row :email
+        row :gender
+        row :type
+        row :birthday
+        row :gender
+        row :phone
+        row :created_at
+        row :updated_at
+      end
+    end
+
+    tabs do
+      tab 'Medicines' do
+        collection = resource.inventories.includes(:medicine).page(params[:inventories_page]).per(10)
+        pagination_options = {param_name: 'inventories_page', download_links: false}
+        paginated_collection(collection, pagination_options) do
+          table_options = { id: 'inventories-table', class: 'index_table' }
+          table_for(collection, table_options) do
+            column :medicine do |inventory|
+              inventory.medicine.name
+            end
+            column :quantity
+            column :created_at
+            # column :updated_at
+            column 'Actions' do |inventory|
+              actions = []
+              actions << link_to(I18n.t('active_admin.view'), admin_employee_inventory_path(resource, inventory))
+              actions << link_to(I18n.t('active_admin.edit'), edit_admin_employee_inventory_path(resource, inventory))
+              actions << link_to(I18n.t('active_admin.delete'), admin_employee_inventory_path(resource, inventory), method: :delete, data: { confirm: I18n.t('active_admin.delete_confirmation')})
+              actions.join(' ').html_safe
+            end
+          end
+        end
+
+        div do
+          para do
+            link_to I18n.t('active_admin.new_model', model: 'Inventory'), new_admin_employee_inventory_path(resource), class: 'button'
+          end
+        end
+      end
+    end
+  end
 end
