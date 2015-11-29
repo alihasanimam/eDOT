@@ -1,5 +1,5 @@
 ActiveAdmin.register Patient do
-  permit_params :name, :address, :national_id, :gender, :birthday, :status, :phone, :patient_type_id, :cared_by_id
+  permit_params :name, :address, :national_id, :gender, :birthday, :status, :phone, :patient_type_id, :cared_by_id, medicine_ids: []
 
   index do
     selectable_column
@@ -41,6 +41,7 @@ ActiveAdmin.register Patient do
       f.input :patient_type
       f.input :status, collection: Patient::status_options
       f.input :phone
+      f.input :medicines
     end
     f.actions
   end
